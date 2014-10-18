@@ -43,6 +43,23 @@ public:
   }
 
   int print_values() {
-    
+    float meal_plus_tax = meal + calculate_rate(meal, tax);
+    float total = meal_plus_tax + calculate_rate(meal_plus_tax, tip);
+    cout << "cost of meal is $" << meal << endl;
+    cout << "tax " << tax << endl;
+    cout << "tip " << tip << endl;
+    cout << "total amount due: "
+    return 0;
   }
+  
+  float calculate_rate(float base, float percentage) {
+    float amount = base * percentage / 100;
+    return amount;
+  }
+};
+
+int main() {
+  TipCalc tip;
+  return 0;
 }
+
