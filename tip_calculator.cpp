@@ -1,10 +1,14 @@
 #include <iostream>
+#include <iomanip>
+#include <stdlib.h>
 using namespace std;
 
 class TipCalc {
+  bool trigger;
   float meal, tax, tip;
 public:
   TipCalc() {
+    trigger = false;
     meal = 0.0;
     tax = 0.0;
     tip = 0.0;
@@ -12,6 +16,7 @@ public:
   }
 
   float user_input() {
+    char input;
     cout << "Please input the meal cost $0.00" << endl;
     cin >> meal;
     cout << "Please input the tax 0%" << endl;
@@ -24,21 +29,29 @@ public:
     }
     if(input == 'y') {
       random_tip();
+      print_values();
     }
-    cout << "input tip 0%" << endl;
     if(input == 'n') {
+      cout << "input tip 0%" << endl;
       cin >> tip;
       print_values();
     }
   }
 
   int random_tip() {
-    float output[30] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
-                        11, 12, 13, 14, 15, 16, 17, 18;
-                        19, 20, 21, 22, 23, 24, 25, 26;
+    if(trigger == false) {
+      float output[30] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                        11, 12, 13, 14, 15, 16, 17, 18,
+                        19, 20, 21, 22, 23, 24, 25, 26,
                         27, 28, 29, 30};
-    int randindex = rand() % 31;
-    tip = output[randindex];
+      int randindex = rand() % 31;
+      tip = output[randindex];
+      trigger = true;
+    }
+    else {
+      tip = 0.0;
+      trigger = false;
+    }
     return 0;
   }
 
@@ -48,7 +61,20 @@ public:
     cout << "cost of meal is $" << meal << endl;
     cout << "tax " << tax << endl;
     cout << "tip " << tip << endl;
-    cout << "total amount due: "
+    cout << "total amount due: $" << setprecision(4) << total << endl;
+    cout << "calculate again? (y/n)" << endl;
+    char input;
+    cin >> input;
+    while(input != 'y' && input != 'n') {
+      cout << "please enter 'y' or 'n'" << endl;
+      cin >> input;
+    }
+    if(input == 'y') {
+      meal = 0.0;
+      tax = 0.0;
+      tip = 0.0;
+      user_input();
+    }
     return 0;
   }
   
@@ -62,4 +88,3 @@ int main() {
   TipCalc tip;
   return 0;
 }
-
