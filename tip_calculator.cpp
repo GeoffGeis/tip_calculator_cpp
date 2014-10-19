@@ -16,7 +16,7 @@ public:
     user_input();
   }
 
-  float user_input() {
+  int user_input() {
     char input;
     cout << "Please input the meal cost $0.00" << endl;
     cin >> meal;
@@ -37,6 +37,7 @@ public:
       cin >> tip;
       print_values();
     }
+    return 0;
   }
 
   int random_tip() {
